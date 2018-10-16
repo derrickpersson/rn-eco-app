@@ -7,10 +7,13 @@ import {
   Text,
   TouchableOpacity,
   View,
+  WebView
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
+import MySwiper from '../components/Swiper';
+
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -20,7 +23,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        {/* <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
               source={
@@ -30,9 +33,16 @@ export default class HomeScreen extends React.Component {
               }
               style={styles.welcomeImage}
             />
-          </View>
+          </View> */}
 
-          <View style={styles.getStartedContainer}>
+          {/* <WebView
+            source={{uri: 'https://derrickpersson.github.io/'}}
+            style={{marginTop: 20}}
+          /> */}
+
+          <MySwiper/>
+
+          {/* <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
@@ -59,7 +69,7 @@ export default class HomeScreen extends React.Component {
           <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
             <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
           </View>
-        </View>
+        </View> */}
       </View>
     );
   }
