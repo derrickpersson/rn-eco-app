@@ -7,11 +7,13 @@ import {
   Text,
   TouchableOpacity,
   View,
+  WebView
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
-import Example from '../components/MyCarousel';
+import MySwiper from '../components/Swiper';
+
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -33,6 +35,11 @@ export default class HomeScreen extends React.Component {
             />
           </View>
           <Example />
+
+          {/* <MySwiper
+            showsButton={false}
+            loop={false}
+          /> */}
 
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
