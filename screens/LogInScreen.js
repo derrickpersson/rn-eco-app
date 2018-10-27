@@ -4,91 +4,56 @@ import {
     View,
     Text,
     TextInput,
-    KeyboardAvoidingView,
+    ScrollView,
+    TouchableHighlight,
 } from 'react-native';
+import { Container, Header, Content, Form, Item, Input } from 'native-base';
 
-export default class OnboardingScreen extends React.Component {
+export default class LogInScreen extends React.Component {
   static navigationOptions = {
-    title: "Please Sign Up",
+    title: "Please Log In",
   };
 
   constructor(props){
       super(props);
       this.state = {
-          name: "",
           email: "",
           password: ""
       }
       this.handleOnPress = this.handleOnPress.bind(this);
-      this.focusNextField = this.focusNextField.bind(this);
-      this.inputs = {};
   }
 
   render() {
     return (
-      <KeyboardAvoidingView 
-        style={styles.container}
-        behavior="padding">
-        <TextInput style={styles.input}
-            placeholder={"Name"}
-            placeholderTextColor={'#fff'}
-            blurOnSubmit={ false }
-            returnKeyType={ "next" }
-            onSubmitEditing={ () => {
-                this.focusNextField("email");
-            }}
-            onChangeText={(name) => this.setState({name})}
-            ref={ input => {
-                this.inputs['name'] = input;
-            }}>
-        </TextInput>
+      <ScrollView contentContainerStyle={styles.container}>
         <TextInput style={styles.input}
             placeholder={"Email"}
             placeholderTextColor={'#fff'}
-            blurOnSubmit={ false }
-            returnKeyType={ "next" }
-            onSubmitEditing={ () => {
-                this.focusNextField("password");
-            }}
-            ref={ input => {
-                this.inputs['email'] = input;
-            }}
             onChangeText={(email) => this.setState({email})}>
         </TextInput>
         <TextInput style={styles.input}
             placeholder={"Password"}
             placeholderTextColor={'#fff'}
-            blurOnSubmit={ true }
-            returnKeyType={ "done" }
-            ref={ input => {
-                this.inputs['password'] = input;
-            }}
             onChangeText={(password) => this.setState({password})}
             secureTextEntry={true}>
         </TextInput>
         <View style={styles.logInLinkContainer}>
             <Text>
-                Already have an account?
-
+                New to Eco App?
                 <Text
                     onPress={this.handleOnPress} style={styles.logIn}
-                > Log In
+                > Sign Up Here
                     {/* <Text style={styles.linkText}>Log In</Text> */}
                 </Text>
             </Text>
         </View>
-        <View style={{ height: 60 }}/>
         
-      </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 
   handleOnPress(){
-    this.props.navigation.navigate('LogIn');
-  }
-
-  focusNextField(id) {
-      this.inputs[id].focus();
+    this.props.navigation.navigate('SignUp');
   }
 }
 
