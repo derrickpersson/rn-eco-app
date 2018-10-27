@@ -5,7 +5,7 @@ import {
     Text,
     TextInput
 } from 'react-native';
-
+import { Container, Header, Content, Form, Item, Input } from 'native-base';
 
 export default class OnboardingScreen extends React.Component {
   static navigationOptions = {
@@ -22,13 +22,17 @@ export default class OnboardingScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Sign Up</Text>
-        <Text>Name</Text>
-        <TextInput
-            style={{height: 40}}
-            placeholder="John 'Greenthumb' Smith"
-            onChangeText={ (text) => this.setState({text})}
-        />
+        <Content>
+          <Form>
+            <Item>
+              <Input placeholder="Username" />
+            </Item>
+            <Item last>
+              <Input placeholder="Password" 
+              secureTextEntry={true}/>
+            </Item>
+          </Form>
+        </Content>
 
       </View>
     );
