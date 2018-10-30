@@ -1,10 +1,12 @@
 import React from 'react';
 import {
+    AsyncStorage,
     StyleSheet,
     View,
     Text,
     TextInput,
     KeyboardAvoidingView,
+    TouchableOpacity
 } from 'react-native';
 
 export default class OnboardingScreen extends React.Component {
@@ -21,6 +23,7 @@ export default class OnboardingScreen extends React.Component {
       }
       this.handleOnPress = this.handleOnPress.bind(this);
       this.focusNextField = this.focusNextField.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
       this.inputs = {};
   }
 
@@ -66,6 +69,9 @@ export default class OnboardingScreen extends React.Component {
             onChangeText={(password) => this.setState({password})}
             secureTextEntry={true}>
         </TextInput>
+        <TouchableOpacity onPress={this.handleSubmit} style={styles.helpLink}>
+              <Text style={styles.text}>Sign Up</Text>
+        </TouchableOpacity>
         <View style={styles.logInLinkContainer}>
             <Text>
                 Already have an account?
@@ -73,7 +79,6 @@ export default class OnboardingScreen extends React.Component {
                 <Text
                     onPress={this.handleOnPress} style={styles.logIn}
                 > Log In
-                    {/* <Text style={styles.linkText}>Log In</Text> */}
                 </Text>
             </Text>
         </View>
@@ -89,6 +94,43 @@ export default class OnboardingScreen extends React.Component {
 
   focusNextField(id) {
       this.inputs[id].focus();
+  }
+
+  handleSubmit = async () => {
+    const response = await this.postSubmit();
+    try {
+        await AsyncStorage.setItem('userToken', 
+        // response.token
+        '123'
+        );
+    } catch (error) {
+        console.log("Error Saving Data: ", error);
+    }
+
+    this.props.navigation.navigate('App');
+  }
+
+  postSubmit = async () => {
+    const submitData = {
+        ...this.state,
+        password_confirmation: this.state.password
+    };
+    const stringifiedData = JSON.stringify(submitData);
+    fetch('http://192.168.1.103:3000/api/v1/users', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: stringifiedData
+    })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            return responseJson;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
   }
 }
 

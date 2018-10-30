@@ -7,7 +7,6 @@ import {
     ScrollView,
     TouchableHighlight,
 } from 'react-native';
-import { Container, Header, Content, Form, Item, Input } from 'native-base';
 
 export default class LogInScreen extends React.Component {
   static navigationOptions = {
